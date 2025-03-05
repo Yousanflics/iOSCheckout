@@ -8,23 +8,27 @@ import SwiftUI
 
 struct CheckoutView: View {
     @StateObject private var viewModel = CheckoutViewModel()
+    @State private var navigationPath = NavigationPath() // 添加路径状态
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             VStack {
                 contentView
                 Spacer()
                 submitButton
-                NavigationLink(
-                    destination: OrderStateView(),
-                    isActive: $viewModel.navigateToStatus
-                ) {
-                    EmptyView()
-                }
-                .hidden()
-
             }
             .navigationTitle("Checkout")
+            .navigationDestination(for: String.self) { value in
+                if value == "OrderStateView" {
+                    OrderStateView()
+                }
+            }
+        }
+        .onChange(of: viewModel.navigateToStatus){ navigate in
+            if navigate {
+                navigationPath.append("OrderStateView")
+                viewModel.navigateToStatus = false
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
