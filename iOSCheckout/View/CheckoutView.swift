@@ -24,7 +24,7 @@ struct CheckoutView: View {
                 }
             }
         }
-        .onChange(of: viewModel.navigateToStatus){ navigate in
+        .onChange(of: viewModel.navigateToStatus){ _, navigate in
             if navigate {
                 navigationPath.append("OrderStateView")
                 viewModel.navigateToStatus = false
