@@ -1,0 +1,17 @@
+{
+    "id": "234",
+    "items": [
+        {
+            "name": "Chicken and fries",
+            "display_price": "$10.00"
+        },
+        {
+            "name": "Samosas",
+            "display_price": "$5.00"
+        },
+        {
+            "name": "Soda",
+            "display_price": null
+        }
+    ]
+}
